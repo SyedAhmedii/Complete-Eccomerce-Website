@@ -10,8 +10,20 @@ import Link from "next/link";
 import { StarRating } from "@/components/star-rating";
 import { Button } from "@/components/ui/button";
 import { LinkIcon, StarIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import { Fragment } from "react";
 import { Progress } from "@/components/ui/progress";
+// import { CartButton } from "../components/cart-button";
+
+const CartButton = dynamic(
+          () => import("../components/cart-button").then(
+                    (mod) => mod.CartButton
+          ),
+          {
+                    ssr: false,
+                    loading: () => <Button disabled className="flex-1 bg-pink-400">Add to cart</Button>
+          },
+);
 
 interface ProductViewProps {
           productId: string;
@@ -93,12 +105,10 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                             <div className="border-t lg:border-t-0 lg:border-l h-full">
                                                                       <div className="flex flex-col gap-6 p-4 border-b">
                                                                                 <div className="flex flex-row items-center gap-2">
-                                                                                          <Button
-                                                                                          variant="elevated"
-                                                                                          className="flex-1 bg-pink-400"
-                                                                                          >
-                                                                                                    Add to cart
-                                                                                          </Button>
+                                                                                          <CartButton
+                                                                                          productId={productId}
+                                                                                          tenantSlug={tenantSlug}
+                                                                                          />
                                                                                           <Button 
                                                                                           className="size-12"
                                                                                           variant="elevated"
