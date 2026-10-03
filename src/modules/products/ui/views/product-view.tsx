@@ -59,25 +59,25 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                                       </div>
                                                                       <div className="px-6 py-4 flex items-center justify-center lg:border-r">
                                                                                 <Link href={generateTenantURL(tenantSlug)} className="flex items-center gap-2">
-                                                                                {data.tenant.image?.url && (
-                                                                                          <Image 
-                                                                                          src={data.tenant.image.url}
-                                                                                          alt={data.tenant.name}
-                                                                                          width={20}
-                                                                                          height={20}
-                                                                                          className="rounded-full border shrink-0 size-[20px]"
-                                                                                          />
-                                                                                )}
-                                                                                <p className="text-base underline font-medium">
-                                                                                          {data.tenant.name}
-                                                                                </p>
+                                                                                          {data.tenant.image?.url && (
+                                                                                                    <Image
+                                                                                                              src={data.tenant.image.url}
+                                                                                                              alt={data.tenant.name}
+                                                                                                              width={20}
+                                                                                                              height={20}
+                                                                                                              className="rounded-full border shrink-0 size-[20px]"
+                                                                                                    />
+                                                                                          )}
+                                                                                          <p className="text-base underline font-medium">
+                                                                                                    {data.tenant.name}
+                                                                                          </p>
                                                                                 </Link>
                                                                       </div>
                                                                       <div className="hidden lg:flex px-6 py-4 items-center justify-center">
                                                                                 <div className="flex items-center gap-1">
                                                                                           <StarRating
-                                                                                          rating={3}
-                                                                                          iconClassName="size-4"
+                                                                                                    rating={3}
+                                                                                                    iconClassName="size-4"
                                                                                           />
                                                                                 </div>
                                                                       </div>
@@ -87,16 +87,16 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                                                 <StarRating
                                                                                           rating={3}
                                                                                           iconClassName="size-4"
-                                                                                          />
-                                                                                          <p className="text-base font-medium">
-                                                                                                    {5} ratings
-                                                                                          </p>
+                                                                                />
+                                                                                <p className="text-base font-medium">
+                                                                                          {5} ratings
+                                                                                </p>
                                                                       </div>
                                                             </div>
                                                             <div className="p-6">
                                                                       {data.description ? (
                                                                                 <p>{data.description}</p>
-                                                                      ): (
+                                                                      ) : (
                                                                                 <p className="font-medium text-muted-foreground italic">No Description Provided</p>
                                                                       )}
                                                             </div>
@@ -106,16 +106,17 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                                       <div className="flex flex-col gap-6 p-4 border-b">
                                                                                 <div className="flex flex-row items-center gap-2">
                                                                                           <CartButton
-                                                                                          productId={productId}
-                                                                                          tenantSlug={tenantSlug}
+                                                                                                    isPurchased={data.isPurchased}
+                                                                                                    productId={productId}
+                                                                                                    tenantSlug={tenantSlug}
                                                                                           />
-                                                                                          <Button 
-                                                                                          className="size-12"
-                                                                                          variant="elevated"
-                                                                                          onClick={() => {}}
-                                                                                          disabled={false}
+                                                                                          <Button
+                                                                                                    className="size-12"
+                                                                                                    variant="elevated"
+                                                                                                    onClick={() => { }}
+                                                                                                    disabled={false}
                                                                                           >
-                                                                                                    <LinkIcon/>
+                                                                                                    <LinkIcon />
                                                                                           </Button>
                                                                                 </div>
                                                                                 <p className="text-center font-medium">
@@ -127,23 +128,23 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                                                                           <h3 className="text-xl font-medium">Ratings</h3>
                                                                                           <div className="flex items-center gap-x-1 font-medium">
                                                                                                     <StarIcon
-                                                                                                    className="size-4 fill-black"
+                                                                                                              className="size-4 fill-black"
                                                                                                     />
                                                                                                     <p>({5})</p>
                                                                                                     <p className="text-base">ratings</p>
                                                                                           </div>
                                                                                 </div>
                                                                                 <div
-                                                                                className="grid grid-cols-[auto_1fr_auto] gap-3 mt-4"
+                                                                                          className="grid grid-cols-[auto_1fr_auto] gap-3 mt-4"
                                                                                 >
                                                                                           {[5, 4, 3, 2, 1].map((stars) => (
                                                                                                     <Fragment key={stars}>
                                                                                                               <div className="font-medium">
                                                                                                                         {stars} {stars === 1 ? "star" : "stars"}
                                                                                                               </div>
-                                                                                                              <Progress 
-                                                                                                              value={60}
-                                                                                                              className="h-[1lh]"
+                                                                                                              <Progress
+                                                                                                                        value={60}
+                                                                                                                        className="h-[1lh]"
                                                                                                               />
                                                                                                               <div className="font-medium">
                                                                                                                         {60}%

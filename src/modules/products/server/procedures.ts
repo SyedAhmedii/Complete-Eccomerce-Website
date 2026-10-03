@@ -1,9 +1,10 @@
 import z from "zod";
+import type { Sort, Where } from "payload";
+import { headers as  getHeaders } from "next/headers";
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
 import { DEFAULT_LIMIT } from "@/constants";
-import type { Sort, Where } from "payload";
-import { Category, Media, Tenant } from "@/payload-types";
 import { sortValues } from "../search-params";
+import { Category, Media, Tenant } from "@/payload-types";
 
 export const productsRouter = createTRPCRouter({
        getOne: baseProcedure
@@ -13,14 +14,45 @@ export const productsRouter = createTRPCRouter({
                      })
               )
               .query(async ({ ctx, input }) => {
+
+                     const headers = await getHeaders();
+                     const session = await ctx.db.auth({ headers });
+
+
                      const product = await ctx.db.findByID({
                             collection: "products",
                             id: input.id,
                             depth: 2,
                      });
 
+                     let isPurchased = false;
+
+                     if (session.user){
+                            const ordersData = await ctx.db.find({
+                                   collection: "orders",
+                                   pagination: false,
+                                   limit: 1,
+                                   where: {
+                                          and: [
+                                                 {
+                                                        product: {
+                                                               equals: input.id,
+                                                        }
+                                                 },
+                                                 {
+                                                        user: {
+                                                               equals: session.user.id
+                                                        },
+                                                 },
+                                          ],
+                                   },
+                            });
+                            isPurchased =!! ordersData.docs[0];
+                     }
+
                      return {
                             ...product,
+                            isPurchased,
                             image: product.image as Media | null,
                             tenant: product.tenant as Tenant & {image: Media | null},
                      }
