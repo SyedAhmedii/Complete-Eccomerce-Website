@@ -65,7 +65,7 @@ export const CheckoutItem = ({
                                         <button
                                                   type="button"
                                                   onClick={() => onRemove(id)}
-                                                  className="mt-2 text-sm underline cursor-pointerD"
+                                                  className="mt-2 text-sm underline cursor-pointer"
                                         >
                                                   Remove
                                         </button>

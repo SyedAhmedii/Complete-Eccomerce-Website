@@ -1,7 +1,10 @@
 import type { CollectionConfig } from "payload";
 
-export const Products: CollectionConfig ={
+export const Products: CollectionConfig = {
           slug: "products",
+          admin: {
+                    useAsTitle: "name",
+          },
           fields: [{
                     name: "name",
                     type: "text",
@@ -47,5 +50,5 @@ export const Products: CollectionConfig ={
                     options: ["30-day", "14-day", "7-day", "3-day", "1-day", "no-refunds"],
                     defaultValue: "30-day"
           }
-]
+          ]
 }
