@@ -13,6 +13,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Tenants } from './collections/Tenants'
 import { Categories } from './collections/Categories'
+import { Reviews } from './collections/Reviews';
 import { Products } from './collections/Products'
 import { Tags } from './collections/Tags'
 import { Config } from './payload-types';
@@ -28,7 +29,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, Products, Tags, Tenants, Orders],
+  collections: [Users, Media, Categories, Products, Tags, Tenants, Orders, Reviews],
   // cookiePrefix: "mert",
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
