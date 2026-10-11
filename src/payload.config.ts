@@ -36,26 +36,27 @@ export default buildConfig({
   collections: [Users, Media, Categories, Products, Tags, Tenants, Orders, Reviews],
   // cookiePrefix: "mert",
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
-  }),
+db: mongooseAdapter({
+  url: process.env.DATABASE_URI || '',
+}),
   sharp,
   plugins: [
     payloadCloudPlugin(),
     multiTenantPlugin<Config>({
       collections: {
         products: {},
+        // media: {},
       },
       tenantsArrayField: {
         includeDefaultField: false,
       },
       userHasAccessToAllTenants: (user) => isSuperAdmin(user),
     }),
-    
+
     // storage-adapter-placeholder
   ],
 })
