@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, LinkIcon, StarIcon } from "lucide-react";
 import { RichText } from "@payloadcms/richtext-lexical/react"
+import type { SerializedEditorState } from "lexical";
 import dynamic from "next/dynamic";
 import { Fragment, useState } from "react";
 import { Progress } from "@/components/ui/progress";
@@ -101,7 +102,7 @@ export const ProductView = ({ productId, tenantSlug }: ProductViewProps) => {
                                           </div>
                                           <div className="p-6">
                                                  {data.description ? (
-                                                        <RichText data={data.description}/>
+                                                        <RichText data={data.description as unknown as SerializedEditorState}/>
                                                  ) : (
                                                         <p className="font-medium text-muted-foreground italic">No Description Provided</p>
                                                  )}

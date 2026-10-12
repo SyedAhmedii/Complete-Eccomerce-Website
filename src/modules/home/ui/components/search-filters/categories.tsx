@@ -27,7 +27,7 @@ export const Categories = ({ data }: Props) => {
   const activeCategory = categoryParam || "all";
 
   const activeCategoryIndex = data.findIndex((cat) => cat.slug === activeCategory)
-  const isActiveCategoryHidden = activeCategory >= visibleCount && activeCategoryIndex !== -1;
+  const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1;
 
   useEffect(() => {
     const calculateVisible = () => {

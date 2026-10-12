@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { CircleXIcon } from "lucide-react";
-import { Span } from "next/dist/trace";
+// import { Span } from "next/dist/trace";
 
 interface CheckoutSidebarProps{
           total: number;

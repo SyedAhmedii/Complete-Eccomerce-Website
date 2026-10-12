@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PriceFilter } from "./price-filter";
 import { TagsFilter } from "./tags-filter";
 import { useProductFilters } from "../../hooks/use-product-filters";
-import { object } from "zod";
+// import { object } from "zod";
 
 
 interface ProductFilterProps {

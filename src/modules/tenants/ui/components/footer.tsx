@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Poppins } from "next/font/google";
 
 import { cn } from "cn";
-import { logoutOperation } from "payload";
+// import { logoutOperation } from "payload";
 
 const poppins = Poppins({
     subsets: ["latin"],

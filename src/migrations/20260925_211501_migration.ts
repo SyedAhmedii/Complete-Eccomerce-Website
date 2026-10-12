@@ -1,12 +1,21 @@
-import {
-  MigrateDownArgs,
-  MigrateUpArgs,
-} from '@payloadcms/db-mongodb'
+// import {
+//   MigrateDownArgs,
+//   MigrateUpArgs,
+// } from '@payloadcms/db-mongodb'
 
-export async function up({ payload, req, session }: MigrateUpArgs): Promise<void> {
+// export async function up({ payload, req, session }: MigrateUpArgs): Promise<void> {
+//   // Migration code
+// }
+
+// export async function down({ payload, req, session }: MigrateDownArgs): Promise<void> {
+//   // Migration code
+// }
+
+
+export async function up(): Promise<void> {
   // Migration code
 }
 
-export async function down({ payload, req, session }: MigrateDownArgs): Promise<void> {
+export async function down(): Promise<void> {
   // Migration code
 }

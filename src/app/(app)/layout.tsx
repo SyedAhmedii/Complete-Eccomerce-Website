@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import { TRPCReactProvider } from "@/trpc/client";
@@ -10,10 +10,10 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 })
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
