@@ -1,6 +1,6 @@
 import { isSuperAdmin } from '@/lib/access';
 import type { CollectionConfig } from 'payload'
-import { text } from 'stream/consumers';
+// import { text } from 'stream/consumers';
 
 export const Reviews: CollectionConfig = {
   slug: "reviews",

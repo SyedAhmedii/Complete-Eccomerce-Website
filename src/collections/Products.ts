@@ -2,7 +2,7 @@ import { isSuperAdmin } from "@/lib/access";
 import { Tenant } from "@/payload-types";
 // import { lexicalEditor, UploadFeature } from "@payloadcms/richtext-lexical";
 import type { CollectionConfig } from "payload";
-import { Media } from "./Media";
+// import { Media } from "./Media";
 
 export const Products: CollectionConfig = {
           slug: "products",

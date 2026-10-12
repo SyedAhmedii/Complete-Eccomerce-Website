@@ -9,6 +9,7 @@ import { ReviewSidebar } from "../components/review-sidebar";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import { Suspense } from "react";
 import { ReviewFormSkeleton } from "../components/review-form";
+import type { SerializedEditorState, SerializedLexicalNode } from "lexical";
 
 
 interface Props {
@@ -49,7 +50,7 @@ export const ProductView = ({ productId }: Props) => {
 
                                                   <div className="lg:col-span-5">
                                                             {data.content ?
-                                                                      <RichText data={data.content} />
+                                                                      <RichText data={data.content as unknown as SerializedEditorState<SerializedLexicalNode>} />
                                                                       : (
                                                                                 <p className="font-medium italic text-muted-foreground">
                                                                                           No Special Content
