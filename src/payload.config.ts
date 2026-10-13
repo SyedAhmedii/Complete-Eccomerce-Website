@@ -58,11 +58,11 @@ db: mongooseAdapter({
       userHasAccessToAllTenants: (user) => isSuperAdmin(user),
     }),
     vercelBlobStorage({
-      enabled: true,
+      enabled: !!process.env.BLOB_READ_WRITE_TOKEN,
       collections: {
         media: true,
       },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
 })
