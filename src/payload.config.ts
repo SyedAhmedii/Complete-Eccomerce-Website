@@ -50,7 +50,7 @@ db: mongooseAdapter({
     multiTenantPlugin<Config>({
       collections: {
         products: {},
-        // media: {},
+        media: {},
       },
       tenantsArrayField: {
         includeDefaultField: false,
