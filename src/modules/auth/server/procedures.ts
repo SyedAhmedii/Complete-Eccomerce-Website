@@ -38,37 +38,66 @@ export const authRouter = createTRPCRouter({
                                 });
                         }
 
-                        const account = await stripe.accounts.create({});
+                        // Stripe account creation
+                        let account;
+                        try {
+                                account = await stripe.accounts.create({});
+                        } catch (e) {
+                                console.error("STRIPE ERROR:", e);
+                                throw new TRPCError({
+                                        code: "BAD_REQUEST",
+                                        message: e instanceof Error ? e.message : "Failed to create Stripe account",
+                                });
+                        }
 
-                        if(!account) {
+                        if (!account) {
                                 throw new TRPCError({
                                         code: "BAD_REQUEST",
                                         message: "Failed to create Stripe account",
                                 });
                         }
 
-                        const tenant = await ctx.db.create({
-                                collection: "tenants",
-                                data: {
-                                        name: input.username,
-                                        slug: input.username,
-                                        stripeAccountId: account.id,
-                                }
-                        });
+                        // Tenant creation
+                        let tenant;
+                        try {
+                                tenant = await ctx.db.create({
+                                        collection: "tenants",
+                                        data: {
+                                                name: input.username,
+                                                slug: input.username,
+                                                stripeAccountId: account.id,
+                                        },
+                                });
+                        } catch (e) {
+                                console.error("TENANT CREATE ERROR:", e);
+                                throw new TRPCError({
+                                        code: "INTERNAL_SERVER_ERROR",
+                                        message: e instanceof Error ? e.message : "Failed to create tenant",
+                                });
+                        }
 
-                        await ctx.db.create({
-                                collection: "users",
-                                data: {
-                                        email: input.email,
-                                        username: input.username,
-                                        password: input.password,
-                                        tenants: [
-                                                {
-                                                        tenant: tenant.id,
-                                                },
-                                        ],
-                                },
-                        });
+                        // User creation
+                        try {
+                                await ctx.db.create({
+                                        collection: "users",
+                                        data: {
+                                                email: input.email,
+                                                username: input.username,
+                                                password: input.password,
+                                                tenants: [
+                                                        {
+                                                                tenant: tenant.id,
+                                                        },
+                                                ],
+                                        },
+                                });
+                        } catch (e) {
+                                console.error("USER CREATE ERROR:", e);
+                                throw new TRPCError({
+                                        code: "INTERNAL_SERVER_ERROR",
+                                        message: e instanceof Error ? e.message : "Failed to create user",
+                                });
+                        }
 
                         const data = await ctx.db.login({
                                 collection: "users",
@@ -85,13 +114,11 @@ export const authRouter = createTRPCRouter({
                                 });
                         }
 
-                        // 🔥 ADD THIS
                         await generateAuthCookie({
                                 prefix: ctx.db.config.cookiePrefix,
                                 value: data.token,
                         });
 
-                        // 🔥 ADD THIS
                         return data;
                 }),
 

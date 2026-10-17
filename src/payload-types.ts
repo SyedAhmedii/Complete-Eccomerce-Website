@@ -147,6 +147,10 @@ export interface User {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Google OAuth user ID (set automatically)
+   */
+  googleId?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -450,6 +454,7 @@ export interface UsersSelect<T extends boolean = true> {
         tenant?: T;
         id?: T;
       };
+  googleId?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
